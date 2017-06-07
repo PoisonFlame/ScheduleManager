@@ -1,17 +1,25 @@
 package ca.ziggs.schedulemanager;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import com.amulyakhare.textdrawable.TextDrawable;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +31,18 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ImageButton toggle_today_button = (ImageButton) findViewById(R.id.btn_toggle_today_layout);
+        final RelativeLayout today_relative_layout = (RelativeLayout) findViewById(R.id.today_layer_layout);
+
+        toggle_today_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                today_relative_layout.getLayoutParams().height= 200;
+                today_relative_layout.requestLayout();
+                Log.d("test1212","btn_clik");
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +51,11 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
+        TextDrawable drawable = TextDrawable.builder()
+                .buildRoundRect("CT", Color.DKGRAY,60);
+        ImageView image = (ImageView) findViewById(R.id.imgJobTitle);
+        image.setImageDrawable(drawable);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,13 +105,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_home) {
+            // Handle the home action
+            Intent i = new Intent(getApplicationContext(),MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else if (id == R.id.nav_schedule) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_paycheck) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_share) {
 

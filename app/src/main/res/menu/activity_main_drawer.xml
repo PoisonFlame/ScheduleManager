@@ -3,19 +3,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_home"
             android:icon="@drawable/ic_action_home"
+            android:checked="true"
             android:title="Home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_schedule"
             android:icon="@drawable/ic_action_schedule"
             android:title="Schedule" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_paycheck"
             android:icon="@drawable/ic_action_paycheck"
             android:title="Paycheck Info" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
             android:title="Settings" />
     </group>

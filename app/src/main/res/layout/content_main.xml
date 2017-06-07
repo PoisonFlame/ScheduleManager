@@ -4,27 +4,827 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/week_layer_background"
+    android:orientation="vertical"
+    android:weightSum="1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ca.ziggs.schedulemanager.MainActivity"
-    tools:showIn="@layout/app_bar_main"
+    tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:showIn="@layout/app_bar_main">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+
+    <RelativeLayout
+        android:id="@+id/today_layer_layout"
         android:layout_width="match_parent"
-        android:layout_height="179dp"
+        android:layout_height="171dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/today_layer_background"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="2dp">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textWorkTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Today"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imgJobTitle"
+            android:fontFamily="serif"
+            android:text="1:45 PM - 9:45 PM"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textColor="#fff"
             android:textSize="24sp" />
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/textToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:fontFamily="serif"
+            android:text=" Today"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <ImageView
+            android:id="@+id/imgJobTitle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:scaleType="fitStart"
+            app:srcCompat="@android:color/holo_blue_bright" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/imgJobTitle"
+            android:layout_toEndOf="@+id/imgJobTitle"
+            android:layout_toRightOf="@+id/imgJobTitle"
+            android:orientation="horizontal"
+            android:paddingLeft="4dp">
+
+            <ImageView
+                android:id="@+id/imgTitle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/ic_action_title" />
+
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:text="Walmart"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/linearLayout"
+            android:layout_toEndOf="@+id/imgJobTitle"
+            android:layout_toRightOf="@+id/imgJobTitle"
+            android:orientation="horizontal"
+            android:paddingLeft="4dp">
+
+            <ImageView
+                android:id="@+id/imgLocation"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/ic_action_location" />
+
+            <TextView
+                android:id="@+id/textLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Walmart, 18th Street"
+                android:textAlignment="textStart"
+                android:textColor="#fff"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_toEndOf="@+id/imgJobTitle"
+            android:layout_toRightOf="@+id/imgJobTitle"
+            android:orientation="horizontal"
+            android:paddingLeft="4dp">
+
+            <ImageView
+                android:id="@+id/imgLunch"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/ic_action_lunch_break" />
+
+            <TextView
+                android:id="@+id/textBreak"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1 Lunch, 2 Coffee"
+                android:textAlignment="viewStart"
+                android:textColor="#fff"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/linearLayout3"
+            android:layout_toEndOf="@+id/imgJobTitle"
+            android:layout_toRightOf="@+id/imgJobTitle"
+            android:orientation="horizontal"
+            android:paddingLeft="4dp">
+
+            <ImageView
+                android:id="@+id/imgDuration"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/ic_action_timee" />
+
+            <TextView
+                android:id="@+id/textDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="8 hours"
+                android:textAlignment="textStart"
+                android:textColor="#fff"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_toggle_today_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linearLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_action_arrow_up" />
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/stats_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/today_layer_layout"
+            android:background="@drawable/week_layer_background"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/week_stats_layout"
+                android:layout_width="match_parent"
+                android:layout_height="171dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/weekly_stats_label_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textWeeklyStats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1"
+                        android:fontFamily="serif"
+                        android:text="This Week"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+                        android:textColor="#fff"
+                        android:textSize="24sp"
+                        android:textStyle="bold|italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/weekly_cards_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/workingDaysInWeek"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textWeeklyStats"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgDaysWorkingThisWeek"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_days_working" />
+
+                        <TextView
+                            android:id="@+id/textDaysWorking"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="3 Days"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textLabelWorking"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Working  Days"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/workingHoursInWeek"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/textWeeklyStats"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toEndOf="@+id/workingDaysInWeek"
+                        android:layout_toRightOf="@+id/workingDaysInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgTimeWorkingThisWeek"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_timee" />
+
+                        <TextView
+                            android:id="@+id/textTimeWorking"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="20.25 Hours"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/textTimeWorkingLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Working Hours"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/moneyInWeek"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/workingHoursInWeek"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toEndOf="@+id/workingHoursInWeek"
+                        android:layout_toRightOf="@+id/workingHoursInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgMoneyEarnedThisWeek"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_money_earned" />
+
+                        <TextView
+                            android:id="@+id/textMoneyEarned"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="$450.55"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Money Earned"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nextShiftInWeek"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/moneyInWeek"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_toEndOf="@+id/moneyInWeek"
+                        android:layout_toRightOf="@+id/moneyInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imageView13"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_upcoming_shift" />
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="2 Days"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Next Shift"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/month_stats_layout"
+                android:layout_width="match_parent"
+                android:layout_height="302dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/today_layer_layout"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/monthly_stats_label_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textMonthlyStats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1"
+                        android:fontFamily="serif"
+                        android:text="This Month"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+                        android:textColor="#fff"
+                        android:textSize="24sp"
+                        android:textStyle="bold|italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/monthly_cards_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/workingDaysInMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textWeeklyStats"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgDaysWorkingThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_days_working" />
+
+                        <TextView
+                            android:id="@+id/textDaysWorkingThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="3 Days"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textLabelWorkingThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Working  Days"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/workingHoursInMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/textWeeklyStats"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toEndOf="@+id/workingDaysInWeek"
+                        android:layout_toRightOf="@+id/workingDaysInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgTimeWorkingThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_timee" />
+
+                        <TextView
+                            android:id="@+id/textTimeWorkingMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="20.25 Hours"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/textTimeWorkingLabelMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Working Hours"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/moneyInWeekMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/workingHoursInWeek"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toEndOf="@+id/workingHoursInWeek"
+                        android:layout_toRightOf="@+id/workingHoursInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgMoneyEarnedThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_money_earned" />
+
+                        <TextView
+                            android:id="@+id/textMoneyEarnedMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="$450.55"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textLabelMoneyEarnedMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Money Earned"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nextShiftInMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/moneyInWeek"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_toEndOf="@+id/moneyInWeek"
+                        android:layout_toRightOf="@+id/moneyInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgNextShiftMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_upcoming_shift" />
+
+                        <TextView
+                            android:id="@+id/textNextShiftMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="2 Days"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tetLabelNextShiftMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Next Shift"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/monthly_cards1_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/workingDaysInMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textWeeklyStats"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgPayWageMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_paywage" />
+
+                        <TextView
+                            android:id="@+id/textPayWage"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="$11.45"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textLabelPayWage"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Pay Wage    Per Hour"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/workingHoursInMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/textWeeklyStats"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toEndOf="@+id/workingDaysInWeek"
+                        android:layout_toRightOf="@+id/workingDaysInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgDaysOffThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_weekend" />
+
+                        <TextView
+                            android:id="@+id/textDaysOffThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="20.25 Hours"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/textLabelDaysOffThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Days Off"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/moneyInWeekMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/workingHoursInWeek"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toEndOf="@+id/workingHoursInWeek"
+                        android:layout_toRightOf="@+id/workingHoursInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgMoneyEarnedThisMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_job_status" />
+
+                        <TextView
+                            android:id="@+id/textMoneyEarnedMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Part-time"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textLabelStatusMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Job Status"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nextShiftInMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignTop="@+id/moneyInWeek"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_toEndOf="@+id/moneyInWeek"
+                        android:layout_toRightOf="@+id/moneyInWeek"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <ImageView
+                            android:id="@+id/imgNumberOfJobs"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            app:srcCompat="@drawable/ic_action_jobs" />
+
+                        <TextView
+                            android:id="@+id/textNumberOfJobs"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textLabelNumberOfJobs"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Number of Jobs"
+                            android:textAlignment="center"
+                            android:textColor="#fff" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>
