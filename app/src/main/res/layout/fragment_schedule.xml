@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:agendaCalendar="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout_noShiftsDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textNoShiftsScheduled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Upcoming Shifts Scheduled"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Would you like to add shifts?"
+            android:textAlignment="center"
+            android:textColor="#FFF"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnScheduleShift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Shifts" />
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview_schedule"
+        android:dividerHeight="1dp"
+        android:divider="#000"></ListView>
+
+
+</LinearLayout>

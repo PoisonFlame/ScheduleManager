@@ -1,25 +1,24 @@
 package ca.ziggs.schedulemanager;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-import com.amulyakhare.textdrawable.TextDrawable;
+import ca.ziggs.schedulemanager.fragments.MainFragment;
+import ca.ziggs.schedulemanager.fragments.PayCheckFragment;
+import ca.ziggs.schedulemanager.fragments.ScheduleFragment;
+import ca.ziggs.schedulemanager.fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,17 +30,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ImageButton toggle_today_button = (ImageButton) findViewById(R.id.btn_toggle_today_layout);
-        final RelativeLayout today_relative_layout = (RelativeLayout) findViewById(R.id.today_layer_layout);
+        Bundle bundle = getIntent().getExtras();
 
-        toggle_today_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                today_relative_layout.getLayoutParams().height= 200;
-                today_relative_layout.requestLayout();
-                Log.d("test1212","btn_clik");
-            }
-        });
+        ImageButton toggle_today_button = (ImageButton) findViewById(R.id.btn_toggle_today_layout);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,10 +43,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        TextDrawable drawable = TextDrawable.builder()
-                .buildRoundRect("CT", Color.DKGRAY,60);
-        ImageView image = (ImageView) findViewById(R.id.imgJobTitle);
-        image.setImageDrawable(drawable);
+
+
+//        TextDrawable drawable = TextDrawable.builder()
+//                .buildRoundRect("CT", Color.DKGRAY,60);
+//        ImageView image = (ImageView) findViewById(R.id.imgJobTitle);
+//        image.setImageDrawable(drawable);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,6 +58,37 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+           setTitle("Home");
+           MainFragment fragment = new MainFragment();
+           FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+           fragmentTransaction.replace(R.id.content_frame, fragment, "fragment_main");
+           fragmentTransaction.commit();
+
+        try{
+            if(bundle.getString("loadFragment")!= null){
+                String getFrg = bundle.getString("loadFragment");
+                if(getFrg.equals("scheduleFragment")){
+                    //LOAD SCHEDULE FRAGMENT
+                setTitle("Home");
+                ScheduleFragment frg2 = new ScheduleFragment();
+                navigationView.setCheckedItem(R.id.nav_schedule);
+                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction2.replace(R.id.content_frame,frg2,"schedule_fragment");
+                fragmentTransaction2.commit();
+                }
+            }
+        }catch (Exception e){
+
+        }
+
+
+
+
+
+
+
     }
 
     @Override
@@ -106,16 +130,29 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the home action
-            Intent i = new Intent(getApplicationContext(),MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
+            setTitle("Home");
+            MainFragment fragment = new MainFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_home");
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_schedule) {
-
+            setTitle("Schedule");
+            ScheduleFragment fragment = new ScheduleFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_schedule");
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_paycheck) {
-
+            setTitle("Paycheck-Info");
+            PayCheckFragment fragment = new PayCheckFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_paycheck");
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_settings) {
-
+            setTitle("Settings");
+            SettingsFragment fragment = new SettingsFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_settings");
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/week_layer_background"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ca.ziggs.schedulemanager.UpdateShiftActivity"
+    tools:showIn="@layout/activity_update_shift">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Workplace Name:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editWorkplaceNameUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#444"
+                android:ems="10"
+                android:inputType="textCapSentences|textPersonName"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textJobTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Job Title:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editJobTitleUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#444"
+                android:ems="10"
+                android:inputType="textCapSentences|textPersonName"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textShiftDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shift Date:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editShiftDateUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#444"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="none"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shift Time:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editShiftTimeUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#444"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="none"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Duration:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editDurationUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#444"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="none"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textBreaks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Breaks:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/editBreaksUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#444"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="none"
+                android:textColor="#fff" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnCancelUpdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cancel" />
+
+                    <Button
+                        android:id="@+id/btnUpdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Update" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
