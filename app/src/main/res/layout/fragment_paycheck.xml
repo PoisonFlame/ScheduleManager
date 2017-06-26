@@ -4,8 +4,17 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textPaycheckInfoLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PayCheck Info" />
+        android:text="PayCheck Info"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/listPaychecks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#808080"
+        android:dividerHeight="2dp" />
+
 </LinearLayout>

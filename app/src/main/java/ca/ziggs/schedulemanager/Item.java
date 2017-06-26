@@ -14,6 +14,10 @@ public class Item {
     private String formattedTime;
     private String dateTime;
 
+    public Item(){
+
+    }
+
     public Item(int id,String name,String date,String time,String duration, String iconURL,String formattedTime,String dateTime){
         this.id = id;
         this.date = date;

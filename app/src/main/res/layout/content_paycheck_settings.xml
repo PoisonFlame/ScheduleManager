@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/week_layer_background"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ca.ziggs.schedulemanager.ActivityPaycheckSettings"
+    tools:showIn="@layout/activity_paycheck_settings">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Salary Options"
+                    android:textColor="#fff"
+                    android:textSize="30sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                android:id="@+id/textSalary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salary:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textAlignment="textEnd"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editSalary"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#444"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    tools:text="11.45" />
+
+                <TextView
+                    android:id="@+id/textSlashForSalary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="/"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinSalaryType"
+                    android:layout_width="143dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textFirstPaycheckDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="First Paycheck Date:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/editFirstPaycheckDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#444"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:inputType="textCapSentences|textPersonName"
+                    android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textPayPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pay Period:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+                <Spinner
+                    android:id="@+id/spinPayPeriod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                android:id="@+id/textWeekStartDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Week Start Day:"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+
+                <Spinner
+                    android:id="@+id/spinWeekStartDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Canada Tax Options"
+                    android:textColor="#fff"
+                    android:textSize="30sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Note: If Canadian Taxes Deductions are not used then only gross pay will be calculated."
+                    android:textColor="#fff"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <CheckBox
+                    android:id="@+id/checkUseCATax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Use Canadian Tax Deductions"
+                    android:textColor="#fff" />
+
+                <LinearLayout
+                    android:id="@+id/taxOptionsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textProvince"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Your Province:"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+
+                    <Spinner
+                        android:id="@+id/spinProvince"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/textTaxExemptions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tax Exemptions:"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+
+                    <CheckBox
+                        android:id="@+id/checkCPPExclude"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Exclude C.P.P"
+                        android:textColor="#fff" />
+
+                    <CheckBox
+                        android:id="@+id/checkEIExclude"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Exclude E.I"
+                        android:textColor="#fff" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cancel" />
+
+                    <Button
+                        android:id="@+id/btnSubmit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Update" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

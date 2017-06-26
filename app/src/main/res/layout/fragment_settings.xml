@@ -5,31 +5,69 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="#333"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/topSettings"
-            android:background="@drawable/item_border"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textLabelShiftManagement"
+            <LinearLayout
+                android:id="@+id/manageShiftsLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Manage Shifts"
-                android:textColor="#fff"
-                android:layout_marginLeft="4dp"
-                android:textSize="24sp"
-                android:textStyle="bold|italic" />
+                android:background="@drawable/item_border"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnAddShift"
+                <TextView
+                    android:id="@+id/textLabelShiftManagement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="Manage Shifts"
+                    android:textAllCaps="true"
+                    android:textColor="#fff"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic" />
+
+                <Button
+                    android:id="@+id/btnAddShift"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Shift" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/managePaycheckLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Shift" />
+                android:background="@drawable/item_border"
+                android:layout_marginTop="10dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textPaycheckOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="Paycheck Settings"
+                    android:textAllCaps="true"
+                    android:textColor="#fff"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic" />
+
+                <Button
+                    android:id="@+id/btnOpenPaycheckSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Open Paycheck Settings" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

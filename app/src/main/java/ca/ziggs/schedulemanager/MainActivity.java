@@ -29,7 +29,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        DBHandler db = new DBHandler(getApplicationContext());
+        //db.truncatePaycheckSettings();
+        // db.createTestDB();
+        db.createPaycheckSettingsDB();
+        db.defaultPaycheckSettings();
 
+
+
+        //db.truncateShiftsTable();
         Bundle bundle = getIntent().getExtras();
 
         ImageButton toggle_today_button = (ImageButton) findViewById(R.id.btn_toggle_today_layout);
@@ -71,12 +79,19 @@ public class MainActivity extends AppCompatActivity
                 String getFrg = bundle.getString("loadFragment");
                 if(getFrg.equals("scheduleFragment")){
                     //LOAD SCHEDULE FRAGMENT
-                setTitle("Home");
-                ScheduleFragment frg2 = new ScheduleFragment();
-                navigationView.setCheckedItem(R.id.nav_schedule);
-                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction2.replace(R.id.content_frame,frg2,"schedule_fragment");
-                fragmentTransaction2.commit();
+                    setTitle("Schedule");
+                    ScheduleFragment frg2 = new ScheduleFragment();
+                    navigationView.setCheckedItem(R.id.nav_schedule);
+                    FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction2.replace(R.id.content_frame,frg2,"schedule_fragment");
+                    fragmentTransaction2.commit();
+                }else if(getFrg.equals("paycheckFragment")){
+                    setTitle("Paycheck Info");
+                    PayCheckFragment frg2 = new PayCheckFragment();
+                    navigationView.setCheckedItem(R.id.nav_paycheck);
+                    FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction2.replace(R.id.content_frame,frg2,"paycheck_fragment");
+                    fragmentTransaction2.commit();
                 }
             }
         }catch (Exception e){
@@ -117,7 +132,17 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            setTitle("Settings");
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+            navigationView.setCheckedItem(R.id.nav_settings);
+
+            SettingsFragment fragment = new SettingsFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_settings");
+            fragmentTransaction.commit();
+            //return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -30,6 +30,11 @@
             android:label="@string/title_activity_update_shift"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ActivityPaycheckSettings"
+            android:label="@string/title_activity_paycheck_settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

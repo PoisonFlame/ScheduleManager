@@ -34,8 +34,10 @@
                 android:background="#444"
                 android:ems="10"
                 android:inputType="textCapSentences|textPersonName"
+                android:text="Walmart"
                 android:textColor="#fff"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="Walmart" />
 
             <TextView
                 android:id="@+id/textJobTitle"
@@ -52,7 +54,9 @@
                 android:background="#444"
                 android:ems="10"
                 android:inputType="textCapSentences|textPersonName"
-                android:textColor="#fff" />
+                android:text="Cashier"
+                android:textColor="#fff"
+                tools:text="Cashier" />
 
             <TextView
                 android:id="@+id/textShiftDate"

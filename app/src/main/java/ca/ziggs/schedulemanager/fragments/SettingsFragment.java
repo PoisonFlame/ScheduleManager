@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import ca.ziggs.schedulemanager.ActivityPaycheckSettings;
 import ca.ziggs.schedulemanager.AddShiftActivity;
 import ca.ziggs.schedulemanager.R;
 
@@ -33,11 +34,20 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
        Button btnAddShift = (Button)view.findViewById(R.id.btnAddShift);
+       Button btnPaycheckOptions = (Button)view.findViewById(R.id.btnOpenPaycheckSettings);
 
         btnAddShift.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), AddShiftActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnPaycheckOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), ActivityPaycheckSettings.class);
                 startActivity(i);
             }
         });

@@ -2,6 +2,7 @@ package ca.ziggs.schedulemanager;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -52,7 +53,7 @@ public class ItemListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, final ViewGroup viewGroup) {
         View v = View.inflate(mContext, R.layout.listview_schedule_item, null);
         TextView textName = (TextView)v.findViewById(R.id.textTitle);
         TextView textDuration = (TextView)v.findViewById(R.id.textDuration);
@@ -104,6 +105,12 @@ public class ItemListAdapter extends BaseAdapter {
                                 alert.setTitle("Confirm");
                                 alert.show();
                                 break;
+                           case R.id.edit:
+                               Intent mIntent = new Intent(mContext,UpdateShiftActivity.class);
+                               mIntent.putExtra("contentID",mItemList.get(i).getId());
+                               //mIntent.putExtra("contentID",1212);
+                               mContext.startActivity(mIntent);
+                               break;
                             default:
                                 Toast.makeText(mContext, "You selected the action : " + item.getTitle() +" on ID: " + mItemList.get(i).getId(), Toast.LENGTH_SHORT).show();
                                 break;

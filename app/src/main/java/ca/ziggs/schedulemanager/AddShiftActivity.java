@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -19,7 +20,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class AddShiftActivity extends AppCompatActivity {
 
@@ -55,6 +55,8 @@ public class AddShiftActivity extends AppCompatActivity {
         editDuration.setKeyListener(null);
         editDate.setKeyListener(null);
         editBreaks.setKeyListener(null);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,37 +287,46 @@ public class AddShiftActivity extends AppCompatActivity {
                 month_formatted = "";
             }
 
-
+            //calendar.set(year,month, day);
             calendar.set(year,month-1,day);
 
-            GregorianCalendar GregorianCal = new GregorianCalendar(year,month,day -2);
-            int dayOfWeek = GregorianCal.get(Calendar.DAY_OF_WEEK);
+            //GregorianCalendar GregorianCal = new GregorianCalendar(year,month,day -2);
+            //int dayOfWeek = GregorianCal.get(Calendar.DAY_OF_WEEK);
             String dayName;
 
-            if(dayOfWeek == Calendar.MONDAY){
-                dayName = "Monday";
-            }else if(dayOfWeek == Calendar.TUESDAY){
-                dayName = "Tuesday";
-            }else if(dayOfWeek == Calendar.WEDNESDAY){
-                dayName = "Wednesday";
-            }else if (dayOfWeek == Calendar.THURSDAY){
-                dayName = "Thursday";
-            }else if (dayOfWeek == Calendar.FRIDAY){
-                dayName = "Friday";
-            }else if(dayOfWeek == Calendar.SATURDAY){
-                dayName = "Saturday";
-            }else if(dayOfWeek == Calendar.SUNDAY){
-                dayName = "Sunday";
-            }else{
+            SimpleDateFormat inFormat = new SimpleDateFormat("dd-MM-yyyy");
+            try{
+                Date date = inFormat.parse(day+"-"+month+"-"+year);
+                SimpleDateFormat outFormat  = new SimpleDateFormat("EEEE");
+                dayName = outFormat.format(date);
+            }catch (ParseException e){
                 dayName = "";
             }
+
+//            if(dayOfWeek == Calendar.MONDAY){
+//                dayName = "Monday";
+//            }else if(dayOfWeek == Calendar.TUESDAY){
+//                dayName = "Tuesday";
+//            }else if(dayOfWeek == Calendar.WEDNESDAY){
+//                dayName = "Wednesday";
+//            }else if (dayOfWeek == Calendar.THURSDAY){
+//                dayName = "Thursday";
+//            }else if (dayOfWeek == Calendar.FRIDAY){
+//                dayName = "Friday";
+//            }else if(dayOfWeek == Calendar.SATURDAY){
+//                dayName = "Saturday";
+//            }else if(dayOfWeek == Calendar.SUNDAY){
+//                dayName = "Sunday";
+//            }else{
+//                dayName = "";
+//            }
 
 
             editDate.setText(dayName +", " + day_formatted + " " + month_formatted + " " + year);
             //rawDate = day+"/"+month+"/"+year;
             try{
                 final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-                final Date dateObject = sdf.parse(year+"-"+month+"-"+day);
+                final Date dateObject = sdf.parse(year+"-"+(month)+"-"+day);
                 String datess = new SimpleDateFormat("yyyy-mm-dd").format(dateObject);
                 rawDate = datess;
             }catch (ParseException e){

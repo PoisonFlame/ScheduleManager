@@ -58,7 +58,7 @@ public class ScheduleFragment extends Fragment {
         lvItems = (ListView)view.findViewById(R.id.listview_schedule);
         mItemList = new ArrayList<>();
         //db.truncateShiftsTable();
-        List<JobEntry> shiftList = db.getAllShifts();
+        List<JobEntry> shiftList = db.getAllShifts("now");
 
         if(shiftList.isEmpty()){
             noShiftsLayout.setVisibility(View.VISIBLE);
@@ -77,13 +77,29 @@ public class ScheduleFragment extends Fragment {
         for (JobEntry shift : shiftList){
             try{
                 final SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
+                final SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd H:mm");
+                //Date shiftEnd = new Date();
+                Date now = new Date();
+                Date shiftEnd = sdf2.parse(shift.getDate() + " " + shift.getEndTime());
                 final Date dateObject = sdf.parse(shift.getStartTime());
+                int difference = now.compareTo(shiftEnd);
+                //Toast.makeText(getContext(),shiftEnd.toString(),Toast.LENGTH_SHORT).show();
+                //final Date dateObject2 = sdf.parse(shift.getEndTime());
                 String shiftTime = new SimpleDateFormat("hh:mm aa").format(dateObject);//shiftTime.setText(new SimpleDateFormat("hh:mm aa").format(dateObject));
-                mItemList.add(new Item(shift.getId(),shift.getLocation(),shift.getFormattedDate(),shiftTime,shift.getDuration(),shift.getLocation().substring(0,1),shift.getFormattedTime(),shift.getDateTime()));
+                //String shiftEndTime = new SimpleDateFormat("HH:mm").format(dateObject2);
+                if(difference < 0) {
+                    mItemList.add(new Item(shift.getId(), shift.getLocation(), shift.getFormattedDate(), shiftTime, shift.getDuration(), shift.getLocation().substring(0, 1), shift.getFormattedTime(), shift.getDateTime()));
+                }
             }catch (ParseException e){
                 // Do Jack
             }
            }
+
+        if(mItemList.isEmpty()){
+            noShiftsLayout.setVisibility(View.VISIBLE);
+        }else{
+            noShiftsLayout.setVisibility(View.GONE);
+        }
 
 //        mItemList.add(new Item(1,"Walmart","Monday, June 12th 2017","03:15 pm","5h 45m","W"));
 //        mItemList.add(new Item(2,"Walmart","Wednesday June 14th 2017","12:00 pm","6h 45m","W"));
