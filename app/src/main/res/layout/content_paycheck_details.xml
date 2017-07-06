@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ca.ziggs.schedulemanager.PaycheckDetailsActivity"
+    tools:showIn="@layout/activity_paycheck_details">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:background="@drawable/week_layer_background"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/layoutTopBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/item_border"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_border"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textPaidByLabel"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.30"
+                        android:layout_height="wrap_content"
+                        android:text="Employer:"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/textPaidBy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:text="CrawlMart"
+                        android:textColor="#0080ff"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/item_border"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textPaydayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Payday:"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/textPayday"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:text="Fri, 30th Jun 2017"
+                        android:textColor="#0080ff"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#444"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textEarningsLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Regular Earnings"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/earningsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textHoursEarningLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hours"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textHours"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#0080ff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textRateEarningsLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rate"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textRate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#0080ff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textThisPeriodEarningsLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="This Period"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textThisPeriod"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#00FF00"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textYTDLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="YTD"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textYTD"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#00FF00"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#444"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textOvertimeEarningsLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Overtime Earnings"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/overtimeEarningsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textHoursEarningLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hours"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textHoursOvertime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#0080ff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textRateEarningsLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rate"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textRateOvertime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#0080ff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textThisPeriodEarningsLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="This Period"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textThisPeriodOvertime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#00FF00"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textYTDLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="YTD"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textYTDOvertime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#00FF00"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#444"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textStatHolidayEarningsLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stat Holiday Earnings"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/overtimeEarningsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textHoursEarningLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hours"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textHoursStat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#0080ff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textRateEarningsLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rate"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textRateStat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#0080ff"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textThisPeriodEarningsLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="This Period"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textThisPeriodStat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#00FF00"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textYTDLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="YTD"
+                            android:textAlignment="center"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textYTDStat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textAlignment="center"
+                            android:textColor="#00FF00"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutGrossPay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#8e8e8e"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textGrossPayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.80"
+                        android:background="@drawable/item_border"
+                        android:text="Gross Pay:"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/textGrossPayThisPeriod"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:gravity="center_vertical"
+                        android:text="+900.00"
+                        android:textAlignment="center"
+                        android:textColor="#00FF00"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textYTDGrossPay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:gravity="center_vertical"
+                        android:text="11,000.00"
+                        android:textAlignment="center"
+                        android:textColor="#00FF00"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutTaxDeductions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#444"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textTaxDeductionsLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.36"
+                        android:background="@drawable/item_border"
+                        android:text="Tax Deductions"
+                        android:textColor="#fff"
+                        android:textSize="23sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/item_border"
+                        android:layout_weight="1.8"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textFederalTaxes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Federal Taxes:"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textFederalTaxThisPeriod"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="-900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textFederalTaxYTD"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/item_border"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.8"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textProvincialTaxes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Provincial Taxes:"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textProvincialTaxesThisPeriod"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textProvincialTaxesYTD"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/item_border"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.8"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textCPPLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="C.P.P:"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textCPPThisPeriod"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textCPPYTD"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/item_border"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.8"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textEILabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="E.I:"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textEIThisPeriod"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textEIYTD"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/item_border"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.8"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textTotalTaxLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Total Taxes:"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textTotalTaxesThisPeriod"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textTotalTaxYTD"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/item_border"
+                            android:gravity="center_vertical"
+                            android:text="900.00"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutNetPay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#8e8e8e"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textNetPayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.80"
+                        android:background="@drawable/item_border"
+                        android:text="Net Pay:"
+                        android:textColor="#fff"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/textNetPayThisPeriod"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/item_border"
+                        android:gravity="center_vertical"
+                        android:text="900.00"
+                        android:textAlignment="center"
+                        android:textColor="#00FF00"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textYTDNetPay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/item_border"
+                        android:gravity="center_vertical"
+                        android:text="11,000.00"
+                        android:textAlignment="center"
+                        android:textColor="#00FF00"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/btnClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.99"
+                    android:text="Close" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -76,20 +77,41 @@ public class ScheduleFragment extends Fragment {
 
         for (JobEntry shift : shiftList){
             try{
-                final SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
-                final SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd H:mm");
+                final SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                final SimpleDateFormat sdf4 = new SimpleDateFormat("kk");
+                final SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 //Date shiftEnd = new Date();
                 Date now = new Date();
-                Date shiftEnd = sdf2.parse(shift.getDate() + " " + shift.getEndTime());
+                Date jobDate = sdf3.parse(shift.getDate());
+                String nowDateString = sdf3.format(now);
+                String jobDateString = sdf3.format(jobDate);
+                Date strictShiftEndTime = sdf.parse(shift.getEndTime());
+                String stringShiftEndTime = sdf4.format(strictShiftEndTime);
+                Date shiftEnd;
+                if(nowDateString.equals(jobDateString) && (Integer.valueOf(stringShiftEndTime) < 12)){
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(jobDate);
+                    c.add(Calendar.DATE,1);
+                    String modifiedDate = sdf3.format(c.getTime());
+                    shiftEnd = sdf2.parse(modifiedDate + " " + shift.getEndTime());
+                }else{
+                    shiftEnd = sdf2.parse(shift.getDate() + " " + shift.getEndTime());
+                }
+                //Toast.makeText(getContext(),"" + stringShiftEndTime,Toast.LENGTH_LONG).show();
+
                 final Date dateObject = sdf.parse(shift.getStartTime());
                 int difference = now.compareTo(shiftEnd);
+                //Toast.makeText(getContext(),"" + nowDateString+" hi " + jobDateString,Toast.LENGTH_LONG).show();
+                boolean isTimeValid = now.after(shiftEnd);
                 //Toast.makeText(getContext(),shiftEnd.toString(),Toast.LENGTH_SHORT).show();
                 //final Date dateObject2 = sdf.parse(shift.getEndTime());
                 String shiftTime = new SimpleDateFormat("hh:mm aa").format(dateObject);//shiftTime.setText(new SimpleDateFormat("hh:mm aa").format(dateObject));
                 //String shiftEndTime = new SimpleDateFormat("HH:mm").format(dateObject2);
-                if(difference < 0) {
+                //if(!isTimeValid){
+               if(difference < 0) {
                     mItemList.add(new Item(shift.getId(), shift.getLocation(), shift.getFormattedDate(), shiftTime, shift.getDuration(), shift.getLocation().substring(0, 1), shift.getFormattedTime(), shift.getDateTime()));
-                }
+               }
             }catch (ParseException e){
                 // Do Jack
             }

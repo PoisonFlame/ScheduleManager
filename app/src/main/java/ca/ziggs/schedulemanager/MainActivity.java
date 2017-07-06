@@ -23,6 +23,8 @@ import ca.ziggs.schedulemanager.fragments.SettingsFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    int mNav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +101,44 @@ public class MainActivity extends AppCompatActivity
         }
 
 
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override public void onDrawerSlide(View drawerView, float slideOffset) {}
+            @Override public void onDrawerOpened(View drawerView) {}
+            @Override public void onDrawerStateChanged(int newState) {}
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                //Set your new fragment here
+                if (mNav == R.id.nav_home) {
+                    setTitle("Home");
+                    MainFragment fragment = new MainFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_home");
+                    fragmentTransaction.commit();
+                } else if (mNav == R.id.nav_schedule) {
+                    setTitle("Schedule");
+                    ScheduleFragment fragment = new ScheduleFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_schedule");
+                    fragmentTransaction.commit();
+                } else if (mNav == R.id.nav_paycheck) {
+                    setTitle("Paycheck-Info");
+                    PayCheckFragment fragment = new PayCheckFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_paycheck");
+                    fragmentTransaction.commit();
+                } else if (mNav == R.id.nav_settings) {
+                    setTitle("Settings");
+                    SettingsFragment fragment = new SettingsFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame, fragment, "fragment_settings");
+                    fragmentTransaction.commit();
+                }
+            }
+        });
+
 
 
 
@@ -153,39 +193,22 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            setTitle("Home");
-            MainFragment fragment = new MainFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_home");
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_schedule) {
-            setTitle("Schedule");
-            ScheduleFragment fragment = new ScheduleFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_schedule");
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_paycheck) {
-            setTitle("Paycheck-Info");
-            PayCheckFragment fragment = new PayCheckFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_paycheck");
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_settings) {
-            setTitle("Settings");
-            SettingsFragment fragment = new SettingsFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame,fragment,"fragment_settings");
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+        mNav = id;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
+
+
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
+
+
         return true;
     }
+
+
 }

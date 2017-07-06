@@ -15,6 +15,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#808080"
-        android:dividerHeight="2dp" />
+        android:dividerHeight="2dp"
+        android:visibility="visible" />
+
+    <ScrollView
+        android:id="@+id/scrollNoPaychecks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/layoutNoPaychecks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Paycheck Data Found"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="72sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/item_border"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Note: Make sure you you have declared the first date in the paycheck settings and have added your schedule."
+                    android:textColor="#fff"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnOpenPaycheckSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Open Paycheck Settings" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -17,9 +17,8 @@
         android:id="@+id/layout_no_shifts_today"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/today_layer_background"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:background="@drawable/week_layer_background"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView2"
@@ -28,19 +27,239 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:text="No Shifts Today :)"
+            android:text="No Upcoming Shifts Scheduled Today"
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="36sp" />
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/today_layer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="171dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/week_layer_background"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="2dp">
+
+        <LinearLayout
+            android:id="@+id/hiiiii"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textToday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="serif"
+                android:text=" Today"
+                android:layout_weight="7"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/textLabelNumOfShifts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textToday"
+                android:layout_alignBottom="@+id/textToday"
+                android:layout_toLeftOf="@+id/btnNextJob"
+                android:layout_toStartOf="@+id/btnNextJob"
+                android:layout_weight="1.5"
+                android:text="1/2"
+                android:textAlignment="viewEnd"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/btnNextJob"
+                android:layout_width="5dp"
+                android:layout_height="35dp"
+                android:layout_above="@+id/linearLayout"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/btn_toggle_today_layout"
+                android:layout_weight="1.5"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_action_forward" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hllo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgJobTitle"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                android:scaleType="fitStart"
+                app:srcCompat="@android:color/holo_blue_bright" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@+id/imgJobTitle"
+                    android:layout_toEndOf="@+id/imgJobTitle"
+                    android:layout_toRightOf="@+id/imgJobTitle"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingLeft="4dp">
+
+                    <ImageView
+                        android:id="@+id/imgJobLocation"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        app:srcCompat="@drawable/ic_action_title" />
+
+                    <TextView
+                        android:id="@+id/textLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="center"
+                        android:text="Walmart"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        android:textColor="#fff"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/linearLayout"
+                    android:layout_toEndOf="@+id/imgJobTitle"
+                    android:layout_toRightOf="@+id/imgJobTitle"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingLeft="4dp">
+
+                    <ImageView
+                        android:id="@+id/imgTitle"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        app:srcCompat="@drawable/ic_action_person" />
+
+                    <TextView
+                        android:id="@+id/textTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Cashier"
+                        android:textAlignment="textStart"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/linearLayout2"
+                    android:layout_toEndOf="@+id/imgJobTitle"
+                    android:layout_toRightOf="@+id/imgJobTitle"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingLeft="4dp">
+
+                    <ImageView
+                        android:id="@+id/imgLunch"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        app:srcCompat="@drawable/ic_action_lunch_break" />
+
+                    <TextView
+                        android:id="@+id/textBreak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="1 Lunch, 2 Coffee"
+                        android:textAlignment="viewStart"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/linearLayout3"
+                    android:layout_toEndOf="@+id/imgJobTitle"
+                    android:layout_toRightOf="@+id/imgJobTitle"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingLeft="4dp">
+
+                    <ImageView
+                        android:id="@+id/imgDuration"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        app:srcCompat="@drawable/ic_action_timee" />
+
+                    <TextView
+                        android:id="@+id/textDuration69"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="8 hours"
+                        android:textAlignment="textStart"
+                        android:textColor="#fff"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textWorkTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imgJobTitle"
+            android:fontFamily="serif"
+            android:text="1:45 PM - 9:45 PM"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textColor="#fff"
+            android:textSize="24sp" />
+
+
+    </LinearLayout>
+
+   <!-- <RelativeLayout
             android:id="@+id/today_layer_layout"
             android:layout_width="match_parent"
             android:layout_height="171dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/today_layer_background"
+            android:background="@drawable/week_layer_background"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="2dp">
@@ -197,15 +416,15 @@
                     android:textStyle="italic" />
             </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/btn_toggle_today_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/linearLayout"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_action_arrow_up" />
+        <ImageButton
+            android:id="@+id/btn_toggle_today_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linearLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_action_arrow_up" />
 
         <ImageButton
             android:id="@+id/btnNextJob"
@@ -234,7 +453,7 @@
 
 
     </RelativeLayout>
-
+-->
     <LinearLayout
         android:id="@+id/layout_noStatsAvailable"
         android:layout_width="match_parent"

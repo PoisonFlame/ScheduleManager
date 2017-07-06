@@ -1,6 +1,8 @@
 package ca.ziggs.schedulemanager;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,10 +48,10 @@ public class PaycheckListAdapter extends BaseAdapter {
     @Override
     public View getView(final int i, View view, final ViewGroup viewGroup) {
         View v = View.inflate(mContext, R.layout.listview_paycheck_item, null);
-        TextView textPayPeriod = (TextView) v.findViewById(R.id.textPayPeriod);
-        TextView textName = (TextView) v.findViewById(R.id.textName);
+        final TextView textPayPeriod = (TextView) v.findViewById(R.id.textPayPeriod);
+        final TextView textName = (TextView) v.findViewById(R.id.textName);
         TextView textSalary = (TextView) v.findViewById(R.id.textSalary);
-        TextView textPayday = (TextView) v.findViewById(R.id.textPayday);
+        final TextView textPayday = (TextView) v.findViewById(R.id.textPayday);
         TextView textSalaryType = (TextView) v.findViewById(R.id.textPayType);
         final ImageView imgArrowUpDown = (ImageView)v.findViewById(R.id.imgArrowUpDown);
         final LinearLayout layoutPaycheckDetails = (LinearLayout)v.findViewById(R.id.layoutPaycheckDetails);
@@ -103,7 +104,13 @@ public class PaycheckListAdapter extends BaseAdapter {
         btnMoreDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"ID Selected: " + mPaycheckList.get(i).getId(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext,"ID Selected: " + mPaycheckList.get(i).getId(),Toast.LENGTH_SHORT).show();
+                Intent mIntent = new Intent(view.getContext(),PaycheckDetailsActivity.class);
+                mIntent.putExtra("salaryDate",mPaycheckList.get(i).getSalaryPayDate());
+                mIntent.putExtra("payPeriod", textPayPeriod.getText().toString());
+                mIntent.putExtra("employer", textName.getText().toString());
+                mIntent.putExtra("payDay", textPayday.getText().toString());
+                view.getContext().startActivity(mIntent);
             }
         });
 
@@ -121,8 +128,42 @@ public class PaycheckListAdapter extends BaseAdapter {
         });
 
         db = new DBHandler(mContext);
+
+        String[] payPeriod = textPayPeriod.getText().toString().split("-");
+        String beginPeriod = payPeriod[0].trim().replace("/","-");
+        String endPeriod = payPeriod[1].trim().replace("/","-");
+
+        //db.setPaycheckInDB(textName.getText().toString(),mPaycheckList.get(i).getSalaryPayDate(),db.getPaycheckColumn(db.KEY_SALARY),db.getWeekWorkingHours(beginPeriod, endPeriod),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "grosspay"),"0.00","0.00","0.00","0.00","0.00","0.00",db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "grosspay"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "fed"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "pro"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "cpp"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "ei"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "default"));
+        setPaycheckASyncTask setPaycheckASyncTask = new setPaycheckASyncTask();
+        setPaycheckASyncTask.execute(textName.getText().toString(),mPaycheckList.get(i).getSalaryPayDate(),beginPeriod,endPeriod);
+        //setPaycheckASyncTask.execute(textName.getText().toString(),mPaycheckList.get(i).getSalaryPayDate(),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "grosspay"),"0.00","0.00","0.00","0.00","0.00","0.00",db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "grosspay"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "fed"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "pro"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "cpp"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "ei"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(beginPeriod, endPeriod)), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "default"));
+
         v.setTag(mPaycheckList.get(i).getId());
         return v;
+    }
+
+    private class setPaycheckASyncTask extends AsyncTask<String,String,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+
+           // db.setPaycheckInDB(strings[0],strings[1],db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "grosspay"),"0.00","0.00","0.00","0.00","0.00","0.00",db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "grosspay"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "fed"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "pro"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "cpp"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "ei"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "default"));
+
+            db.setPaycheckInDB(strings[0],strings[1],db.getPaycheckColumn(db.KEY_SALARY),db.getWeekWorkingHours(strings[2], strings[3]),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "grosspay"),"0.00","0.00","0.00","0.00","0.00","0.00",db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "grosspay"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "fed"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "pro"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "cpp"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "ei"),db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(strings[2], strings[3])), Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)), "default"));
+            //db.setPaycheckInDB(strings[0],strings[1],strings[2],strings[3],strings[4],strings[5],strings[6],strings[7],strings[8],
+              //      strings[9],strings[10],strings[11],strings[12],strings[13],strings[14],strings[15],strings[16]);
+            return null;
+        }
     }
 
 }

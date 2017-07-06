@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.Nullable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,8 +28,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
     //Main Table
     private static final String TABLE_JOB_SCHEDULE = "jobSchedule";
-    private static final String TABLE_PAYCHECK_SETTINGS = "paycheckSettings";
     //private static final String TABLE_JOB_SCHEDULE = "jobScheduleTEST";
+    private static final String TABLE_PAYCHECK_SETTINGS = "paycheckSettings";
+    private static final String TABLE_PAYCHECKS = "paychecks";
+
 
     //Main Table's Column Names
     public static final String KEY_ID = "id";
@@ -57,6 +60,26 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_CPP_EXEMPT = "exemptCPP";
     public static final String KEY_EI_EXEMPT = "exemptEI";
 
+
+    //Paycheck Table Column Names
+    public static final String KEY_EMPLOYER = "employer";
+    public static final String KEY_PAYDAY = "payday";
+    public static final String KEY_REGULAR_PAYRATE = "regularPayRate";
+    public static final String KEY_OVERTIME_PAYRATE = "overtimePayRate";
+    public static final String KEY_STAT_PAYRATE = "statPayRate";
+    public static final String KEY_REGULAR_HOURS = "regularHours";
+    public static final String KEY_OVERTIME_HOURS = "overtimeHours";
+    public static final String KEY_STAT_HOURS = "statHours";
+    public static final String KEY_REGULAR_EARNINGS_THIS_PERIOD = "regularEarningsThisPeriod";
+    public static final String KEY_OVERTIME_EARNINGS_THIS_PERIOD = "overtimeEarningsThisPeriod";
+    public static final String KEY_STAT_EARNINGS_THIS_PERIOD = "statEarningsThisPeriod";
+    public static final String KEY_GROSSPAY_THIS_PERIOD = "grosspayThisPeriod";
+    public static final String KEY_FEDERAL_TAXES_THIS_PERIOD = "federalTaxesThisPeriod";
+    public static final String KEY_PROVINCIAL_TAXES_THIS_PERIOD = "provincialTaxesThisPeriod";
+    public static final String KEY_CPP_THIS_PERIOD = "cppThisPeriod";
+    public static final String KEY_EI_THIS_PERIOD = "eiThisPeriod";
+    public static final String KEY_NETPAY_THIS_PERIOD = "netpayThisPeriod";
+
     public Context mContext;
 
     public DBHandler(Context context){
@@ -81,6 +104,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + KEY_DATETIME + " TEXT " + ")";
 
         sqLiteDatabase.execSQL(CREATE_JOB_SCHEDULE_TABLE);
+        sqLiteDatabase.close();
     }
 
     @Override
@@ -89,6 +113,7 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_JOB_SCHEDULE);
         //Create Again
         onCreate(sqLiteDatabase);
+        sqLiteDatabase.close();
     }
 
     void addNewEntry(JobEntry newEntry){
@@ -126,7 +151,186 @@ public class DBHandler extends SQLiteOpenHelper {
                 + KEY_DATETIME + " TEXT " + ")";
 
         db.execSQL(CREATE_JOB_SCHEDULE_TABLE);
+        db.close();
     }
+
+    public void createPaychecksDB(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String CREATE_PAYCHECKS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PAYCHECKS + "("
+                + KEY_ID + " INTEGER PRIMARY KEY,"
+                + KEY_EMPLOYER + " TEXT,"
+                + KEY_PAYDAY + " TEXT,"
+                + KEY_REGULAR_PAYRATE + " TEXT,"
+                + KEY_REGULAR_HOURS + " TEXT,"
+                + KEY_REGULAR_EARNINGS_THIS_PERIOD + " TEXT,"
+                + KEY_OVERTIME_PAYRATE + " TEXT,"
+                + KEY_OVERTIME_HOURS + " TEXT,"
+                + KEY_OVERTIME_EARNINGS_THIS_PERIOD + " TEXT,"
+                + KEY_STAT_PAYRATE + " TEXT,"
+                + KEY_STAT_HOURS + " TEXT,"
+                + KEY_STAT_EARNINGS_THIS_PERIOD + " TEXT,"
+                + KEY_GROSSPAY_THIS_PERIOD + " TEXT,"
+                + KEY_FEDERAL_TAXES_THIS_PERIOD + " TEXT,"
+                + KEY_PROVINCIAL_TAXES_THIS_PERIOD + " TEXT,"
+                + KEY_CPP_THIS_PERIOD + " TEXT,"
+                + KEY_EI_THIS_PERIOD + " TEXT,"
+                + KEY_NETPAY_THIS_PERIOD + " TEXT " + ")";
+
+        db.execSQL(CREATE_PAYCHECKS_TABLE);
+        db.close();
+    }
+
+    public void setPaycheckInDB(String employer, String payday, String regular_payrate, String regular_hours, String regular_earning_TP, String overtime_payrate
+    , String overtime_hours, String overtime_earning_TP, String stat_payrate, String stat_hours, String stat_earning_TP, String grosspay_TP, String fed_TP, String pro_TP, String CPP_TP, String EI_TP, String netpay_TP){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + "='"+ payday+"'";
+        Cursor cursor = db.rawQuery(query,null);
+
+        if(cursor.getCount() <=0) {
+            ContentValues values = new ContentValues();
+            values.put(KEY_EMPLOYER, employer);
+            values.put(KEY_PAYDAY, payday);
+            values.put(KEY_REGULAR_PAYRATE, regular_payrate);
+            values.put(KEY_REGULAR_HOURS, regular_hours);
+            values.put(KEY_REGULAR_EARNINGS_THIS_PERIOD, regular_earning_TP);
+            values.put(KEY_OVERTIME_PAYRATE, overtime_payrate);
+            values.put(KEY_OVERTIME_HOURS, overtime_hours);
+            values.put(KEY_OVERTIME_EARNINGS_THIS_PERIOD, overtime_earning_TP);
+            values.put(KEY_STAT_PAYRATE, stat_payrate);
+            values.put(KEY_STAT_HOURS, stat_hours);
+            values.put(KEY_STAT_EARNINGS_THIS_PERIOD, stat_earning_TP);
+            values.put(KEY_GROSSPAY_THIS_PERIOD, grosspay_TP);
+            values.put(KEY_FEDERAL_TAXES_THIS_PERIOD, fed_TP);
+            values.put(KEY_PROVINCIAL_TAXES_THIS_PERIOD, pro_TP);
+            values.put(KEY_CPP_THIS_PERIOD, CPP_TP);
+            values.put(KEY_EI_THIS_PERIOD, EI_TP);
+            values.put(KEY_NETPAY_THIS_PERIOD, netpay_TP);
+            db.insert(TABLE_PAYCHECKS, null, values);
+            //Toast.makeText(mContext,"Inserted for " + payday,Toast.LENGTH_SHORT).show();
+        }else{
+            //Check if the hours working have changed.
+            String query1 = "SELECT " + KEY_REGULAR_HOURS + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + "='" + payday+"'";
+            String query2 = "SELECT " + KEY_OVERTIME_HOURS + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + "='" + payday+"'";
+            String query3 = "SELECT " + KEY_STAT_HOURS + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + "='" + payday+"'";
+            Cursor cur1 = db.rawQuery(query1,null);
+            Cursor cur2 = db.rawQuery(query2,null);
+            Cursor cur3 = db.rawQuery(query3,null);
+
+            String regHours= "",overtimeHours="",statHours = "";
+
+            if(cur1.moveToFirst()){
+                regHours = cur1.getString(0);
+            }
+
+            if(cur2.moveToFirst()){
+                overtimeHours = cur2.getString(0);
+            }
+
+            if(cur3.moveToFirst()){
+                statHours = cur3.getString(0);
+            }
+
+            if((regHours.equals(regular_hours)) && (overtimeHours.equals(overtime_hours)) && (statHours.equals(stat_hours))){
+                // hours have not changed changed so do nothing.
+                //Toast.makeText(mContext,"hours not changed for " + payday,Toast.LENGTH_SHORT).show();
+            }else{
+                ContentValues values = new ContentValues();
+                values.put(KEY_REGULAR_HOURS, regular_hours);
+                values.put(KEY_OVERTIME_HOURS, overtime_hours);
+                values.put(KEY_STAT_HOURS, stat_hours);
+                values.put(KEY_GROSSPAY_THIS_PERIOD, grosspay_TP);
+                values.put(KEY_FEDERAL_TAXES_THIS_PERIOD, fed_TP);
+                values.put(KEY_PROVINCIAL_TAXES_THIS_PERIOD, pro_TP);
+                values.put(KEY_CPP_THIS_PERIOD, CPP_TP);
+                values.put(KEY_EI_THIS_PERIOD, EI_TP);
+                values.put(KEY_NETPAY_THIS_PERIOD, netpay_TP);
+                values.put(KEY_STAT_EARNINGS_THIS_PERIOD, stat_earning_TP);
+                values.put(KEY_OVERTIME_EARNINGS_THIS_PERIOD, overtime_earning_TP);
+                values.put(KEY_REGULAR_EARNINGS_THIS_PERIOD, regular_earning_TP);
+
+                db.update(TABLE_PAYCHECKS,values,KEY_PAYDAY+"='"+payday+"'",null);
+                //Toast.makeText(mContext,"Hours Updated for "  + payday,Toast.LENGTH_SHORT).show();
+            }
+        }
+        cursor.close();
+        db.close();
+    }
+
+    public boolean checkPaydayExists(String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + "='" + date +"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.getCount() <=0){
+            cursor.close();
+            db.close();
+            return  false;
+        }else{
+            cursor.close();
+            db.close();
+            return true;
+        }
+    }
+
+    public String getPaycheckDataColumn(String date, String column){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + column +" FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + "='" + date+"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst()){
+            String data = cursor.getString(0);
+            cursor.close();
+            db.close();
+            return data;
+        }
+        cursor.close();
+        db.close();
+        return "Error";
+    }
+
+    public double getPaycheckYTD(String startDate, String endDate, String type){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query;
+
+       if(type.equals("regular")){
+           query = "SELECT " + KEY_REGULAR_EARNINGS_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else if(type.equals("overtime")){
+           query = "SELECT " + KEY_OVERTIME_EARNINGS_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else if(type.equals("stat")){
+           query = "SELECT " + KEY_STAT_EARNINGS_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else if(type.equals("grosspay")){
+           query = "SELECT " + KEY_GROSSPAY_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else if(type.equals("fed")){
+           query = "SELECT " + KEY_FEDERAL_TAXES_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else if(type.equals("pro")){
+           query = "SELECT " + KEY_PROVINCIAL_TAXES_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else if(type.equals("cpp")){
+           query = "SELECT " + KEY_CPP_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else if(type.equals("ei")){
+           query = "SELECT " + KEY_EI_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else if(type.equals("netpay")){
+           query = "SELECT " + KEY_NETPAY_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }else{
+           query = "SELECT " + KEY_REGULAR_EARNINGS_THIS_PERIOD + " FROM " + TABLE_PAYCHECKS + " WHERE " + KEY_PAYDAY + " BETWEEN '"+startDate+"' AND '" + endDate +"'";
+       }
+
+       double earningsThisPeriod=0.00;
+
+        Cursor cursor = db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()) {
+            do {
+
+                earningsThisPeriod += Double.valueOf(cursor.getString(0).replace("$","").replace("+","").replace("-",""));
+                //Toast.makeText(mContext, cursor.getString(0), Toast.LENGTH_SHORT).show();
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return earningsThisPeriod;
+        //return String.valueOf(earningsThisPeriod);
+    }
+
 
     public void createPaycheckSettingsDB(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -145,6 +349,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + KEY_FORMATTED_PAYCHECK_DATE + " TEXT " + ")";
 
         db.execSQL(CREATE_PAYCHECK_SETTINGS_TABLE);
+        db.close();
     }
 
     public void defaultPaycheckSettings(){
@@ -168,6 +373,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
             db.insert(TABLE_PAYCHECK_SETTINGS, null, values);
         }
+        cursor.close();
         db.close();
     }
 
@@ -200,7 +406,9 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_CPP_EXEMPT,cppExempt);
         values.put(KEY_EI_EXEMPT, eiExempt);
         values.put(KEY_FORMATTED_PAYCHECK_DATE,formattedStartDate);
-        return db.update(TABLE_PAYCHECK_SETTINGS,values,KEY_ID + "=1",null) > 0;
+        Boolean check = db.update(TABLE_PAYCHECK_SETTINGS,values,KEY_ID + "=1",null) > 0;
+        db.close();
+        return check;
     }
 
     public boolean updateEntry(int updateID, String title, String location, String duration, String startTime, String endTime, String breaks, String date, String formattedDate, String formattedTime, String dateTime){
@@ -217,13 +425,16 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_FORMATTED_DATE, formattedDate);
         values.put(KEY_FORMATTED_TIME, formattedTime);
         values.put(KEY_DATETIME, dateTime);
-        return db.update(TABLE_JOB_SCHEDULE,values,KEY_ID + "=" + updateID,null) > 0;
+        boolean check = db.update(TABLE_JOB_SCHEDULE,values,KEY_ID + "=" + updateID,null) > 0;
+        db.close();
+        return check;
     }
 
     public boolean deleteEntry(int deleteID){
         SQLiteDatabase db = this.getWritableDatabase();
-
-        return db.delete(TABLE_JOB_SCHEDULE,KEY_ID +"=" + deleteID,null) > 0;
+        boolean check = db.delete(TABLE_JOB_SCHEDULE,KEY_ID +"=" + deleteID,null) > 0;
+        db.close();
+        return check;
     }
 
 
@@ -309,12 +520,14 @@ public class DBHandler extends SQLiteOpenHelper {
 //       }else {
 //           return String.format("%.2f",differenceInHours) + " hour";
 //       }
+       db.close();
+       cursor.close();
        return String.format("%.2f",differenceInHours);
    }
 
    //public String getWeekHoursOfUnpaidBreaks()
 
-   public String getMoneyEarned(Double hours, Double hourlyWage){
+   public String getMoneyEarned(Double hours, Double hourlyWage, @Nullable String argument){
 
        Double grossPay = hours * hourlyWage;
 
@@ -391,6 +604,22 @@ public class DBHandler extends SQLiteOpenHelper {
 
        Double netPay = grossPay - CPP - EI - FED - PRO;
 
+
+
+       if(argument.equals("netpay")){
+           return String.format("%.2f",netPay);
+       }else if(argument.equals("grosspay")){
+           return String.format("%.2f",grossPay);
+       }else if(argument.equals("fed")){
+           return String.format("%.2f", FED);
+       }else if(argument.equals("pro")){
+           return String.format("%.2f",PRO);
+       }else if(argument.equals("cpp")){
+           return String.format("%.2f",CPP);
+       }else if(argument.equals("ei")){
+           return String.format("%.2f",EI);
+       }
+
        if(this.getPaycheckColumn(KEY_USE_CANADIAN_TAXES).equals("true")) {
            return String.format("$%.2f", netPay);
        }else{
@@ -412,19 +641,25 @@ public class DBHandler extends SQLiteOpenHelper {
                try{
                    Date date1 = sdf.parse(nextWorkingDate);
                    if(sdf.format(date).equals(sdf.format(date1))){
+                       db.close();
+                       cursor.close();
                        return "Today";
                    }else {
                        //Toast.makeText(mContext,"Date:"+new SimpleDateFormat("yyyy-MM-dd").format(date)+" Date1:"+new SimpleDateFormat("yyyy-MM-dd").format(date1),Toast.LENGTH_LONG).show();
+                       cursor.close();
+                       db.close();
                        return new SimpleDateFormat("EE").format(date1);
                    }
                }catch (ParseException e){
-                   return "N/AE";
+                   return "N/A";
                }
            }while(cursor.moveToNext());
        }
        String amount = String.valueOf(cursor.getCount());
 
        //return nextWorkingDate;
+       db.close();
+       cursor.close();
        return "N/A";
    }
 
@@ -511,6 +746,8 @@ public class DBHandler extends SQLiteOpenHelper {
 //       }else {
 //           return String.format("%.2f",differenceInHours) + " hour";
 //       }
+        db.close();
+        cursor.close();
         return String.format("%.2f",differenceInHours);
     }
 
@@ -543,9 +780,13 @@ public class DBHandler extends SQLiteOpenHelper {
                 try{
                     Date date1 = sdf.parse(nextWorkingDate);
                     if(sdf.format(date).equals(sdf.format(date1))){
+                        db.close();
+                        cursor.close();
                         return "Today";
                     }else {
                         //Toast.makeText(mContext,"Date:"+new SimpleDateFormat("yyyy-MM-dd").format(date)+" Date1:"+new SimpleDateFormat("yyyy-MM-dd").format(date1),Toast.LENGTH_LONG).show();
+                        cursor.close();
+                        db.close();
                         return new SimpleDateFormat("MMM dd").format(date1);
                     }
                 }catch (ParseException e){
@@ -556,6 +797,8 @@ public class DBHandler extends SQLiteOpenHelper {
         String amount = String.valueOf(cursor.getCount());
 
         //return nextWorkingDate;
+        cursor.close();
+        db.close();
         return "N/A";
     }
 
@@ -597,6 +840,8 @@ public class DBHandler extends SQLiteOpenHelper {
         String query = "SELECT DISTINCT " + KEY_LOCATION + " FROM " + TABLE_JOB_SCHEDULE + " WHERE " + KEY_DATE +" BETWEEN '"+startDate+"' AND '"+endDate+"'";
         Cursor cursor = db.rawQuery(query,null);
         int count = cursor.getCount();
+        cursor.close();
+        db.close();
         return  count;
     }
 
@@ -607,8 +852,12 @@ public class DBHandler extends SQLiteOpenHelper {
        Cursor cursor =  db.rawQuery(query,null);
 
        if(cursor.getCount() <= 0){
+           cursor.close();
+           db.close();
            return  false;
        }else{
+           cursor.close();
+           db.close();
            return  true;
        }
    }
@@ -736,7 +985,7 @@ public class DBHandler extends SQLiteOpenHelper {
         TreeSet<String> locationOfJobs = new TreeSet<>();
 
         Double totalHours = Double.valueOf(this.getWeekWorkingHours(beginOfPayPeriod,endOfPayPeriod));
-        String totalSalary = this.getMoneyEarned(totalHours,Double.valueOf(this.getPaycheckColumn(KEY_SALARY)));
+        String totalSalary = this.getMoneyEarned(totalHours,Double.valueOf(this.getPaycheckColumn(KEY_SALARY)),"default");
         String payType;
         if(this.getPaycheckColumn(KEY_USE_CANADIAN_TAXES).equals("true")){
             payType="Net Pay";
@@ -768,8 +1017,12 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
        // for(String jobLocation:locationOfJobs){
-        paycheckList.add(new PayCheck(ID,beginOfPayPeriod.replace("-","/")+" - "+endOfPayPeriod.replace("-","/"),allJobs,salaryDate,totalSalary,payType));
-        //}
+        if(totalHours > 0.00) {
+            paycheckList.add(new PayCheck(ID, beginOfPayPeriod.replace("-", "/") + " - " + endOfPayPeriod.replace("-", "/"), allJobs, salaryDate, totalSalary, payType));
+        }
+            //}
+        cursor.close();
+        db.close();
         return paycheckList;
     }
 
@@ -784,11 +1037,19 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DROP TABLE IF EXISTS " + TABLE_PAYCHECK_SETTINGS;
         db.execSQL(query);
+        db.close();
     }
 
     public void truncatePaycheckSettings(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_PAYCHECK_SETTINGS;
+        db.execSQL(query);
+        db.close();
+    }
+
+    public void dropPaychecks(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DROP TABLE IF EXISTS " + TABLE_PAYCHECKS;
         db.execSQL(query);
         db.close();
     }

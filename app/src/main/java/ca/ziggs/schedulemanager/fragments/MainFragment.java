@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -46,7 +45,7 @@ public class MainFragment extends Fragment{
 
 
         LinearLayout layout_no_shifts_today = (LinearLayout)view.findViewById(R.id.layout_no_shifts_today);
-        RelativeLayout layout_todays_shift = (RelativeLayout) view.findViewById(R.id.today_layer_layout);
+        LinearLayout layout_todays_shift = (LinearLayout) view.findViewById(R.id.today_layer_layout);
         final TextView textTitle = (TextView)view.findViewById(R.id.textTitle);
         final TextView textLocation = (TextView)view.findViewById(R.id.textLocation);
         final TextView textBreaks = (TextView)view.findViewById(R.id.textBreak);
@@ -206,7 +205,7 @@ public class MainFragment extends Fragment{
                 textHoursWorkingInWeek.setText(db.getWeekWorkingHours(sdf3.format(weekStart),sdf3.format(weekEnd)) + "");
             }
 
-            textMoneyEarnedInWeek.setText(db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(sdf3.format(weekStart),sdf3.format(weekEnd))),11.45));
+            textMoneyEarnedInWeek.setText(db.getMoneyEarned(Double.valueOf(db.getWeekWorkingHours(sdf3.format(weekStart),sdf3.format(weekEnd))),Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)),"default"));
             textNextShiftInWeek.setText(db.getWeekNextShift(sdf3.format(weekStart),sdf3.format(weekEnd)));
 
             if(db.getMonthWorkingDays() == 1){
@@ -221,7 +220,7 @@ public class MainFragment extends Fragment{
                 textHoursWorkingInMonth.setText(db.getMonthWorkingHours() + "");
             }
 
-            textMooneyEarnedInMonth.setText(db.getMoneyEarned(Double.valueOf(db.getMonthWorkingHours()),11.45));
+            textMooneyEarnedInMonth.setText(db.getMoneyEarned(Double.valueOf(db.getMonthWorkingHours()),Double.valueOf(db.getPaycheckColumn(db.KEY_SALARY)),"default"));
             textNextShiftInMonth.setText(db.getMonthNextShift());
 
             if(db.getDaysOffThisMonth(db.getMonthWorkingDays()) == 1){

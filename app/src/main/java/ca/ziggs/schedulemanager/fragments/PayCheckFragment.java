@@ -1,11 +1,13 @@
 package ca.ziggs.schedulemanager.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
 
+import ca.ziggs.schedulemanager.ActivityPaycheckSettings;
 import ca.ziggs.schedulemanager.DBHandler;
 import ca.ziggs.schedulemanager.PayCheck;
 import ca.ziggs.schedulemanager.PaycheckListAdapter;
@@ -50,6 +53,7 @@ public class PayCheckFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        Button btnOpenPaycheckOptions = (Button)view.findViewById(R.id.btnOpenPaycheckSettings);
         lvPaychecks = (ListView)view.findViewById(R.id.listPaychecks);
         mPaycheckList = new ArrayList<>();
         TreeSet<String> salaryDates = new TreeSet<>(Collections.reverseOrder());
@@ -61,6 +65,8 @@ public class PayCheckFragment extends Fragment {
         int numOfPaychecks =1;
         String allDates;
         db = new DBHandler(getContext());
+        //db.dropPaychecks();
+        db.createPaychecksDB();
         try{
             firstPaycheckDate = sdf.parse(db.getPaycheckColumn(db.KEY_PAYCHECK_DATE));
             checkNumOfPaychecks = sdf.parse(db.getPaycheckColumn(db.KEY_PAYCHECK_DATE));
@@ -94,9 +100,18 @@ public class PayCheckFragment extends Fragment {
         //test.setText("" + allDates);
         // s
 
+        if(salaryDates.isEmpty()){
+            lvPaychecks.setVisibility(View.GONE);
+        }else{
+            lvPaychecks.setVisibility(View.VISIBLE);
+        }
+
+        //Toast.makeText(getContext(),"" + salaryDates.size(),Toast.LENGTH_SHORT).show();
+
          int id = 0;
         for(String salaryDate : salaryDates){
             List<PayCheck> paychecksInList = db.getPaycheckData(salaryDate,id);
+            //Toast.makeText(getContext(),"" + paychecksInList.size() + " " + salaryDate,Toast.LENGTH_SHORT).show();
             id += 1;
             for(PayCheck paycheck : paychecksInList) {
                 mPaycheckList.add(paycheck);
@@ -104,12 +119,24 @@ public class PayCheckFragment extends Fragment {
             //mPaycheckList.add(new PayCheck(1,"2017/05/12 - 2017/05/27","Walmart",salaryDate,"$323.23","Net-Pay"));
         }
 
+        if(mPaycheckList.isEmpty()){
+            lvPaychecks.setVisibility(View.GONE);
+        }else{
+            lvPaychecks.setVisibility(View.VISIBLE);
+        }
+
 //        mPaycheckList.add(new PayCheck(1,"2017/05/12 - 2017/05/27","Walmart","1212","$323.23","Net-Pay"));
 //        mPaycheckList.add(new PayCheck(2,"2017/05/28 - 2017/06/02","Walmart","1212","$343.23","Net-Pay"));
 //        mPaycheckList.add(new PayCheck(3,"2017/06/03 - 2017/06/17","Walmart","1212","$293.23","Net-Pay"));
 //        mPaycheckList.add(new PayCheck(4,"2017/06/18 - 2017/06/28","Walmart","1212","$523.23","Gross-Pay"));
 
-
+        btnOpenPaycheckOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(getContext(), ActivityPaycheckSettings.class);
+                startActivity(mIntent);
+            }
+        });
 
         adapter = new PaycheckListAdapter(getContext(),mPaycheckList);
         lvPaychecks.setAdapter(adapter);
