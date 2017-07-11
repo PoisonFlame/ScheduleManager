@@ -260,29 +260,29 @@ public class AddShiftActivity extends AppCompatActivity {
             }
             month += 1;
             if(month == 1){
-                month_formatted = "January";
+                month_formatted = "Jan.";
             }else if(month == 2){
-                month_formatted = "February";
+                month_formatted = "Feb.";
             }else if(month == 3){
-                month_formatted = "March";
+                month_formatted = "Mar.";
             }else if(month == 4){
-                month_formatted = "April";
+                month_formatted = "Apr.";
             }else if(month == 5){
                 month_formatted = "May";
             }else if(month == 6){
-                month_formatted = "June";
+                month_formatted = "Jun.";
             }else if(month == 7){
-                month_formatted = "July";
+                month_formatted = "Jul.";
             }else if(month == 8){
-                month_formatted = "August";
+                month_formatted = "Aug.";
             }else if(month == 9){
-                month_formatted = "September";
+                month_formatted = "Sep.";
             }else if(month == 10){
-                month_formatted = "October";
+                month_formatted = "Oct.";
             }else if(month == 11){
-                month_formatted = "November";
+                month_formatted = "Nov.";
             }else if(month == 12){
-                month_formatted = "December";
+                month_formatted = "Dec.";
             }else{
                 month_formatted = "";
             }

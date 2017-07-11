@@ -75,7 +75,7 @@ public class ItemListAdapter extends BaseAdapter {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                       switch (item.getItemId()){
+                        switch (item.getItemId()){
                             case R.id.remove:
                                 //Toast.makeText(mContext,"You removed" + mItemList.get(i).getId(),Toast.LENGTH_SHORT).show();
                                 AlertDialog.Builder alertDial = new AlertDialog.Builder(mContext);
@@ -105,16 +105,16 @@ public class ItemListAdapter extends BaseAdapter {
                                 alert.setTitle("Confirm");
                                 alert.show();
                                 break;
-                           case R.id.edit:
-                               Intent mIntent = new Intent(mContext,UpdateShiftActivity.class);
-                               mIntent.putExtra("contentID",mItemList.get(i).getId());
-                               //mIntent.putExtra("contentID",1212);
-                               mContext.startActivity(mIntent);
-                               break;
+                            case R.id.edit:
+                                Intent mIntent = new Intent(mContext,UpdateShiftActivity.class);
+                                mIntent.putExtra("contentID",mItemList.get(i).getId());
+                                //mIntent.putExtra("contentID",1212);
+                                mContext.startActivity(mIntent);
+                                break;
                             default:
                                 Toast.makeText(mContext, "You selected the action : " + item.getTitle() +" on ID: " + mItemList.get(i).getId(), Toast.LENGTH_SHORT).show();
                                 break;
-                       }
+                        }
                         return true;
                     }
                 });
@@ -129,8 +129,13 @@ public class ItemListAdapter extends BaseAdapter {
         textName.setText(mItemList.get(i).getName());
         textDuration.setText(mItemList.get(i).getDuration());
         textTime.setText(mItemList.get(i).getTime());
-        textDate.setText(mItemList.get(i).getDate());
         imgIcon.setImageDrawable(drawable);
+
+
+
+
+        textDate.setText(mItemList.get(i).getDate());
+        //textDate.setText("hi");
 
         v.setTag(mItemList.get(i).getId());
         return v;

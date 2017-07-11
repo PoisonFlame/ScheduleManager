@@ -928,8 +928,13 @@ public class DBHandler extends SQLiteOpenHelper {
         String query;
         if(condition.equals("now")){
             query = "SELECT * FROM " + TABLE_JOB_SCHEDULE+ " WHERE " + KEY_DATE + " >= date('now','localtime') ORDER BY " + KEY_DATETIME + " ASC";
-        }else if(condition.equals("all")){
-            query = "SELECT * FROM " + TABLE_JOB_SCHEDULE+ " ORDER BY " + KEY_DATETIME + " ASC";
+        }else if(condition.equals("all")) {
+            query = "SELECT * FROM " + TABLE_JOB_SCHEDULE + " ORDER BY " + KEY_DATETIME + " ASC";
+        }else if(condition.startsWith("between")){
+            String startDate = condition.substring(condition.indexOf("Start=") + 6,condition.indexOf("End=")).trim();
+            String endDate = condition.substring(condition.indexOf("End=") + 4).trim();
+            //Toast.makeText(mContext,startDate + " to " + endDate,Toast.LENGTH_LONG).show();
+            query = "SELECT * FROM " + TABLE_JOB_SCHEDULE+ " WHERE " + KEY_DATE + " BETWEEN '"+ startDate + "' AND '" + endDate +"' ORDER BY " + KEY_DATE + " ASC";
         }else{
             query = "SELECT * FROM " + TABLE_JOB_SCHEDULE+ " WHERE " + KEY_DATETIME + " >= datetime('now','localtime') ORDER BY " + KEY_DATETIME + " ASC";
         }
